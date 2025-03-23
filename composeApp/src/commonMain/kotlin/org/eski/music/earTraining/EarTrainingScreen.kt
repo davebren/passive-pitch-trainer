@@ -77,8 +77,8 @@ private fun LevelSelector(vm: EarTrainingOptionsViewModel, expanded: MutableStat
 
   AnimateView(
     visible = visible,
-    enter = slideInHorizontally(animationSpec = tween(300, 200), initialOffsetX = { width -> width }),
-    exit = slideOutHorizontally(targetOffsetX = { width -> width })
+    enter = slideInHorizontally(animationSpec = tween(300, 200), initialOffsetX = { width -> -width }),
+    exit = slideOutHorizontally(targetOffsetX = { width -> -width })
   ) {
     DropDownSelector(
       vmx = vm.levelSelectorDropdown,

@@ -19,8 +19,6 @@ import org.eski.pitch.ui.keybinding.KeyBindingSettingsDialog
 import org.eski.pitch.ui.game.data.GameSettings
 import org.eski.pitch.ui.game.data.GameStatsData
 import org.eski.pitch.ui.game.views.feedback.feedbackFlashAnimation
-import org.eski.pitch.ui.game.views.valueForValue.ValueForValueButton
-import org.eski.pitch.ui.game.views.valueForValue.ValueForValueScreen
 import org.eski.pitch.ui.keybinding.KeyboardInput
 import org.eski.ui.util.grid2
 import org.eski.ui.views.spacer
@@ -40,7 +38,6 @@ fun HomeScreen(
     val achievementsShowing by vm.options.achievementsShowing.collectAsState()
     val valueForValueShowing by vm.valueForValue.menuShowing.collectAsState()
 
-    val startButtonVisible by vm.startButtonVisible.collectAsState()
     val valueForValueButtonVisible by vm.valueForValue.buttonVisible.collectAsState()
     val size by vm.size.collectAsState()
     val actionbarHeight = remember { mutableStateOf(0.dp) }
@@ -79,12 +76,12 @@ fun HomeScreen(
         }
         EarTrainingScreen(host = vm, zIndex = 1f, topBarMargin = actionbarHeight.value)
 
-        ValueForValueButton(
-            vm.valueForValue,
-            visible = valueForValueButtonVisible,
-            containerSize = size,
-            onExpanded = { vm.valueForValue.clicked() }
-        )
+//        ValueForValueButton(
+//            vm.valueForValue,
+//            visible = valueForValueButtonVisible,
+//            containerSize = size,
+//            onExpanded = { vm.valueForValue.clicked() }
+//        )
     }
 
     if (settingsShowing) {
@@ -102,5 +99,5 @@ fun HomeScreen(
         )
     }
 
-    ValueForValueScreen(vm.valueForValue, valueForValueShowing)
+//    ValueForValueScreen(vm.valueForValue, valueForValueShowing)
 }

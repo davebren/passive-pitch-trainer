@@ -18,7 +18,7 @@ class EarTrainingViewModel(
   val host: EarTrainingHost
 ): ViewModel() {
   val gameState = MutableStateFlow(GameState.NotStarted)
-  val options = EarTrainingOptionsViewModel(viewModelScope)
+  val options = EarTrainingOptionsViewModel(viewModelScope, gameState)
   val staff = EarTrainingStaffViewModel(viewModelScope, host, gameState, options.levelSelected)
 
   val startButtonGameState: StateFlow<StartButtonGameState> = gameState.map {
@@ -47,11 +47,11 @@ class EarTrainingViewModel(
   }.stateIn(viewModelScope, SharingStarted.WhileSubscribed(), false)
 
   fun startGame() {
-
+    gameState.value = GameState.Running
   }
 
   fun postGameDismissed() {
-
+    gameState.value = GameState.NotStarted
   }
 
   fun backClicked() {
