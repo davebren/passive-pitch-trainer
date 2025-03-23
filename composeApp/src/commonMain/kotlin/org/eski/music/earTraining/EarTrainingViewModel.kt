@@ -19,6 +19,7 @@ class EarTrainingViewModel(
 ): ViewModel() {
   val gameState = MutableStateFlow(GameState.NotStarted)
   val staff = EarTrainingStaffViewModel(host)
+  val options = EarTrainingOptionsViewModel(viewModelScope)
 
   val startButtonGameState: StateFlow<StartButtonGameState> = gameState.map {
     when(it) {

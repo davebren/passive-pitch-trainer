@@ -155,6 +155,8 @@ enum class Note(
 
   val octave: Int = ordinal / 12
 
+  val defaultClef = if (clefIndex < 0f) Clef.bass else Clef.treble
+
   inline fun natural() = when(ordinal % 12) {
     0 -> true
     1 -> false

@@ -19,7 +19,6 @@ class GameSettings(val settings: Settings) {
 
   val feedbackMode = MutableStateFlow<List<FeedbackMode>>(listOf(FeedbackMode.icon))
 
-
   init {
     val feedbackModeJson = settings.getStringOrNull(feedbackModeKey)
     feedbackModeJson?.let { jsonString ->
