@@ -1,4 +1,4 @@
-package org.eski.music.homeScreen
+package org.eski.passivepitch.homeScreen
 
 import androidx.compose.animation.core.tween
 import androidx.compose.animation.slideInVertically

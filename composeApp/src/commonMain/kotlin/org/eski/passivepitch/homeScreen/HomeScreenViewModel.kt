@@ -1,4 +1,4 @@
-package org.eski.pitch.ui.game.vm
+package org.eski.passivepitch.homeScreen
 
 import androidx.compose.ui.unit.DpSize
 import androidx.compose.ui.unit.IntSize
@@ -14,6 +14,7 @@ import org.eski.music.earTraining.EarTrainingHost
 import org.eski.pitch.ui.game.data.GameSettings
 import org.eski.pitch.ui.game.data.GameStatsData
 import org.eski.pitch.ui.game.model.GameState
+import org.eski.pitch.ui.game.vm.ValueForValueViewModel
 import org.eski.ui.util.screenDensity
 import org.eski.ui.util.toDp
 
@@ -24,7 +25,7 @@ class HomeScreenViewModel(
   override val earTrainingVisibleOnHomeScreen: Boolean = true
 ): ViewModel(), EarTrainingHost {
 
-  val options = GameOptionsViewModel(viewModelScope)
+  val options = HomeScreenOptionsViewModel(viewModelScope)
   val valueForValue = ValueForValueViewModel(viewModelScope)
 
   val startButtonVisible = MutableStateFlow<Boolean>(true)

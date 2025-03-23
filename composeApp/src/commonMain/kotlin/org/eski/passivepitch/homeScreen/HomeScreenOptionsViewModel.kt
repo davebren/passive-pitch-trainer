@@ -1,4 +1,4 @@
-package org.eski.pitch.ui.game.vm
+package org.eski.passivepitch.homeScreen
 
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -7,7 +7,7 @@ import kotlinx.coroutines.flow.takeWhile
 import kotlinx.coroutines.launch
 import org.eski.music.earTraining.data.introSettings
 
-class GameOptionsViewModel(
+class HomeScreenOptionsViewModel(
   scope: CoroutineScope,
 ) {
   val introShowing = MutableStateFlow<Boolean>(false)

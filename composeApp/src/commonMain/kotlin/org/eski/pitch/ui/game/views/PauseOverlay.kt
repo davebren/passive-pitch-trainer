@@ -18,7 +18,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.sp
 import androidx.compose.animation.core.tween
 import org.eski.pitch.ui.game.model.GameState
-import org.eski.pitch.ui.game.vm.HomeScreenViewModel
+import org.eski.passivepitch.homeScreen.HomeScreenViewModel
 
 @Composable
 fun PauseOverlay(

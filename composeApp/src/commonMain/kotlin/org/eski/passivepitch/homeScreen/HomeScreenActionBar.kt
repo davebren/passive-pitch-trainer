@@ -1,4 +1,4 @@
-package org.eski.pitch.ui.game.views
+package org.eski.passivepitch.homeScreen
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -11,8 +11,6 @@ import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
 import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.EmojiEvents
-import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.Info
 import androidx.compose.material.icons.filled.MusicNote
 import androidx.compose.material.icons.filled.Settings
@@ -22,7 +20,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import org.eski.pitch.ui.game.vm.GameOptionsViewModel
 import org.eski.ui.util.grid
 import org.eski.ui.util.grid2
 import org.eski.ui.util.grid6
@@ -31,7 +28,7 @@ import org.eski.ui.views.spacer
 
 @Composable
 fun ActionBarMenu(
-  optionsVm: GameOptionsViewModel
+  optionsVm: HomeScreenOptionsViewModel
 ) {
 
   Box(modifier = Modifier.fillMaxWidth()) {
@@ -69,7 +66,7 @@ fun ActionBarMenu(
   }
 }
 
-@Composable private fun LeftButtons(optionsVm: GameOptionsViewModel, modifier: Modifier) {
+@Composable private fun LeftButtons(optionsVm: HomeScreenOptionsViewModel, modifier: Modifier) {
   Row(
     modifier = modifier
       .fillMaxWidth()
@@ -91,7 +88,7 @@ fun ActionBarMenu(
   }
 }
 
-@Composable private fun RightButtons(optionsVm: GameOptionsViewModel, modifier: Modifier) {
+@Composable private fun RightButtons(optionsVm: HomeScreenOptionsViewModel, modifier: Modifier) {
   Row(
     modifier = modifier
       .padding(horizontal = gridHalf)
