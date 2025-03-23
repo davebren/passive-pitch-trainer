@@ -15,9 +15,17 @@ import androidx.compose.material.icons.filled.Info
 import androidx.compose.material.icons.filled.MusicNote
 import androidx.compose.material.icons.filled.Settings
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.onSizeChanged
+import androidx.compose.ui.platform.LocalDensity
+import androidx.compose.ui.unit.Dp
+import androidx.compose.ui.unit.DpSize
+import androidx.compose.ui.unit.IntSize
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import org.eski.ui.util.grid
@@ -28,10 +36,15 @@ import org.eski.ui.views.spacer
 
 @Composable
 fun ActionBarMenu(
-  optionsVm: HomeScreenOptionsViewModel
+  optionsVm: HomeScreenOptionsViewModel,
+  heightState: MutableState<Dp>,
 ) {
+  val heightPixels = remember { mutableStateOf(0) }
+  heightState.value = with(LocalDensity.current) { heightPixels.value.toDp() }
 
-  Box(modifier = Modifier.fillMaxWidth()) {
+  Box(modifier = Modifier.fillMaxWidth()
+    .onSizeChanged { heightPixels.value = it.height }
+  ) {
     LeftButtons(optionsVm, Modifier.align(alignment = Alignment.CenterStart))
     Column(Modifier.align(alignment = Alignment.Center)) {
       spacer(grid2)

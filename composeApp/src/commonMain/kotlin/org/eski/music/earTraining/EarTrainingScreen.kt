@@ -19,6 +19,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.zIndex
 import androidx.lifecycle.viewmodel.compose.viewModel
@@ -26,6 +27,7 @@ import org.eski.ui.animation.AnimateView
 import org.eski.ui.util.grid
 import org.eski.ui.util.grid2
 import org.eski.ui.views.selectors.DropDownSelector
+import org.eski.ui.views.spacer
 import org.eski.ui.views.startButton.StartButton
 import org.eski.ui.views.topWindowInsetSpacer
 
@@ -34,6 +36,7 @@ fun EarTrainingScreen(
   host: EarTrainingHost,
   vm: EarTrainingViewModel = viewModel { EarTrainingViewModel(host) },
   zIndex: Float,
+  topBarMargin: Dp = 0.dp,
 ) {
   val open by host.earTrainingOpen.collectAsState()
   val size by host.size.collectAsState()
@@ -47,6 +50,7 @@ fun EarTrainingScreen(
       modifier = Modifier.fillMaxSize()
     ) {
       topWindowInsetSpacer()
+      spacer(topBarMargin)
       EarTrainingActionBar(vm)
       Spacer(Modifier.height(grid))
 

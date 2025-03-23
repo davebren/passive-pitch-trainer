@@ -7,6 +7,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.onSizeChanged
+import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import org.eski.music.earTraining.EarTrainingScreen
 import org.eski.music.earTraining.data.keyBindingSettings
@@ -42,6 +43,7 @@ fun HomeScreen(
     val startButtonVisible by vm.startButtonVisible.collectAsState()
     val valueForValueButtonVisible by vm.valueForValue.buttonVisible.collectAsState()
     val size by vm.size.collectAsState()
+    val actionbarHeight = remember { mutableStateOf(0.dp) }
 
     KeyboardInput(keyBindings)
 
@@ -57,7 +59,7 @@ fun HomeScreen(
             modifier = Modifier.fillMaxSize(),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            ActionBarMenu(vm.options)
+            ActionBarMenu(vm.options, actionbarHeight)
             spacer(grid2)
 
             Box(modifier = Modifier.fillMaxSize()) {
@@ -73,11 +75,9 @@ fun HomeScreen(
 
                     HomeScreenNoteInput(KeySignature.cMajor, zIndex = 2f)
                 }
-
-                EarTrainingScreen(host = vm, zIndex = 1f)
             }
         }
-
+        EarTrainingScreen(host = vm, zIndex = 1f, topBarMargin = actionbarHeight.value)
 
         ValueForValueButton(
             vm.valueForValue,
