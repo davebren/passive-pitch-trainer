@@ -1,0 +1,22 @@
+<resources>
+    <string name="backButton">Back Button</string>
+    <string name="muteButton">Mute Button</string>
+    <string name="sightRead">Sight Read</string>
+    <string name="earTraining">Ear Training</string>
+
+    <string name="treblePlusBass">Treble + Bass</string>
+    <string name="trebleOnly">Treble Only</string>
+    <string name="bassOnly">Bass Only</string>
+
+    <string name="levelX">Level %1$d</string>
+
+    <string name="go">Go!</string>
+    <string name="paused">Paused</string>
+
+    <string name="signIn">Sign in to your Eski account</string>
+    <string name="signInWithGoogle">Sign in with Google</string>
+    <string name="signingIn">Signing in...</string>
+    <string name="sync">Sync</string>
+    <string name="syncing">Syncing...</string>
+
+</resources>

@@ -1,0 +1,112 @@
+package org.eski.music.earTraining
+
+import androidx.compose.animation.core.tween
+import androidx.compose.animation.slideInVertically
+import androidx.compose.animation.slideOutVertically
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.*
+import androidx.compose.runtime.*
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.onSizeChanged
+import androidx.compose.ui.unit.IntSize
+import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewmodel.compose.viewModel
+import org.eski.music.earTraining.data.keyBindingSettings
+import org.eski.music.earTraining.data.gameStatsData
+import org.eski.music.homeScreen.HomeScreenNoteInput
+import org.eski.music.model.KeySignature
+import org.eski.pitch.ui.game.InfoDialog
+import org.eski.pitch.ui.keybinding.KeyBindingSettings
+import org.eski.pitch.ui.keybinding.KeyBindingSettingsDialog
+import org.eski.pitch.ui.game.data.GameSettings
+import org.eski.pitch.ui.game.data.GameStatsData
+import org.eski.pitch.ui.game.views.feedback.feedbackFlashAnimation
+import org.eski.pitch.ui.game.views.valueForValue.ValueForValueButton
+import org.eski.pitch.ui.game.views.valueForValue.ValueForValueScreen
+import org.eski.pitch.ui.game.vm.HomeScreenViewModel
+import org.eski.pitch.ui.keybinding.KeyboardInput
+import org.eski.ui.animation.AnimateView
+import org.eski.music.ui.noteInputs.PianoInput
+import org.eski.pitch.ui.game.views.ActionBarMenu
+import org.eski.ui.util.grid2
+import org.eski.ui.views.startButton.StartButton
+
+@Composable
+fun HomeScreen(
+    keyBindings: KeyBindingSettings = keyBindingSettings,
+    gameSettings: GameSettings = org.eski.music.earTraining.data.gameSettings,
+    gameStats: GameStatsData = gameStatsData,
+    vm: HomeScreenViewModel = viewModel {
+        HomeScreenViewModel(gameSettings, gameStats)
+    }
+) {
+
+    val introShowing by vm.options.introShowing.collectAsState()
+    val settingsShowing by vm.options.settingsShowing.collectAsState()
+    val achievementsShowing by vm.options.achievementsShowing.collectAsState()
+    val valueForValueShowing by vm.valueForValue.menuShowing.collectAsState()
+
+    val startButtonVisible by vm.startButtonVisible.collectAsState()
+    val valueForValueButtonVisible by vm.valueForValue.buttonVisible.collectAsState()
+    val size by vm.size.collectAsState()
+
+    KeyboardInput(keyBindings)
+
+    Box(
+        modifier = Modifier
+            .fillMaxSize()
+            .background(color = Color.DarkGray)
+            .onSizeChanged { vm.onSizeChanged(it) }
+            .feedbackFlashAnimation()
+    ) {
+
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(grid2),
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            ActionBarMenu(vm.options)
+            Spacer(modifier = Modifier.height(grid2))
+
+            Row(
+                modifier = Modifier.weight(1f),
+                horizontalArrangement = Arrangement.Center
+            ) {
+                Spacer(modifier = Modifier.width(16.dp))
+            }
+
+            Spacer(modifier = Modifier.fillMaxHeight().weight(1f))
+
+            HomeScreenNoteInput(KeySignature.cMajor, zIndex = 2f)
+        }
+
+        EarTrainingScreen(host = vm, zIndex = 1f)
+
+        ValueForValueButton(
+            vm.valueForValue,
+            visible = valueForValueButtonVisible,
+            containerSize = size,
+            onExpanded = { vm.valueForValue.clicked() }
+        )
+    }
+
+    if (settingsShowing) {
+        KeyBindingSettingsDialog(
+            keyBindingSettings = keyBindings,
+            gameSettings = gameSettings,
+            onDismiss = { vm.options.settingsDismissed() }
+        )
+    }
+
+    if (introShowing) {
+        InfoDialog(
+            onDismiss = { vm.options.introDismissed() },
+            onOpenSettings = { vm.options.settingsClicked() }
+        )
+    }
+
+    ValueForValueScreen(vm.valueForValue, valueForValueShowing)
+}
