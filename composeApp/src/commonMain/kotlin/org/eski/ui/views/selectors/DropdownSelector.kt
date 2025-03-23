@@ -105,6 +105,7 @@ fun DropDownSelector(
                     .clickable {
                       if (option.enabled) {
                         vmx.onSelected.invoke(index)
+                        vmx.onSelectedOption.invoke(option)
                         expanded.value = false
                       }
                     }

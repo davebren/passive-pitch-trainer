@@ -26,6 +26,7 @@ import org.eski.ui.animation.AnimateView
 import org.eski.ui.util.grid
 import org.eski.ui.util.grid2
 import org.eski.ui.views.selectors.DropDownSelector
+import org.eski.ui.views.startButton.StartButton
 import org.eski.ui.views.topWindowInsetSpacer
 
 @Composable
@@ -35,6 +36,7 @@ fun EarTrainingScreen(
   zIndex: Float,
 ) {
   val open by host.earTrainingOpen.collectAsState()
+  val size by host.size.collectAsState()
 
   Box(modifier = Modifier.fillMaxSize()
     .zIndex(zIndex)
@@ -49,41 +51,19 @@ fun EarTrainingScreen(
       Spacer(Modifier.height(grid))
 
       Box(modifier = Modifier.fillMaxSize()) {
-        LevelSelector(vm.options, earTrainingLevelSelectorExpanded)
-
         Column(modifier = Modifier.fillMaxSize()) {
           Row(modifier = Modifier.fillMaxWidth()) {
             Spacer(modifier = Modifier.weight(1f))
             EarTrainingStaff(Modifier.width(200.dp), vm.staff, open)
           }
           Spacer(modifier = Modifier.height(grid2))
-
-//          Selectors(
-//            vm = vm,
-//            sightReadLevelSelectorExpanded = earTrainingLevelSelectorExpanded,
-//            sightReadKeySelectorExpanded = sightReadKeySelectorExpanded,
-//            clefsSelectorExpanded = clefsSelectorExpanded,
-//            includeLevelSelector = !overlaySelectors,
-//            includeKeySelector = !overlaySelectors,
-//            includeClefsSelector = useRadioClefsSelector,
-//            useRadioClefsSelector = useRadioClefsSelector,
-//          )
         }
 
-//        if (overlaySelectors) {
-//          Selectors(
-//            vm = vm,
-//            sightReadLevelSelectorExpanded = earTrainingLevelSelectorExpanded,
-//            sightReadKeySelectorExpanded = sightReadKeySelectorExpanded,
-//            clefsSelectorExpanded = clefsSelectorExpanded,
-//            includeLevelSelector = overlaySelectors,
-//            includeKeySelector = overlaySelectors,
-//            includeClefsSelector = !useRadioClefsSelector,
-//            useRadioClefsSelector = useRadioClefsSelector,
-//          )
-//        }
+        LevelSelector(vm.options, earTrainingLevelSelectorExpanded)
       }
     }
+
+    StartButton(vm = vm.startButton, size)
   }
 }
 

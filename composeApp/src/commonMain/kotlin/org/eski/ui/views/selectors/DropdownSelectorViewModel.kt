@@ -5,9 +5,10 @@ import kotlinx.coroutines.flow.StateFlow
 class DropdownSelectorViewModel(
   val selectedName: StateFlow<String>,
   val options: StateFlow<List<Option>>,
-  val onSelected: (Int) -> Unit,
+  val onSelected: (Int) -> Unit = {},
+  val onSelectedOption: (Option) -> Unit = {},
 ) {
-  class Option(
+  open class Option(
     val name: String,
     val enabled: Boolean
   )

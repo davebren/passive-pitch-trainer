@@ -15,11 +15,16 @@ class EarTrainingOptionsViewModel(
   val levelSelected = MutableStateFlow<PerfectPitchLevel>(PerfectPitchLevel.levels.first()) // TODO:
   val levelSelectedName = levelSelected.map { it.name }.stateIn(scope, SharingStarted.WhileSubscribed(), "")
   val levelSelectorOptions = MutableStateFlow<List<DropdownSelectorViewModel.Option>>(
-    PerfectPitchLevel.levels.map { DropdownSelectorViewModel.Option(it.name, true) }
+    PerfectPitchLevel.levels.map { PerfectPitchLevelOption(it, true) }
   ) // TODO:
   val levelSelectorDropdown = DropdownSelectorViewModel(
     selectedName = levelSelectedName,
     options = levelSelectorOptions,
-    onSelected = {}
+    onSelectedOption = { (it as? PerfectPitchLevelOption)?.let { levelOption -> levelSelected.value = levelOption.level } }
   )
+
+  private class PerfectPitchLevelOption(
+    val level: PerfectPitchLevel,
+    enabled: Boolean,
+  ): DropdownSelectorViewModel.Option(level.name, enabled)
 }
