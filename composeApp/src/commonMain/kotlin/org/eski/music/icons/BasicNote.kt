@@ -22,7 +22,7 @@ public val MusicIcons.BasicNote: ImageVector
       return _basicnote!!
     }
     _basicnote = Builder(
-      name = "Basicnote",
+      name = "BasicNote",
       defaultWidth = 347.84.dp,
       defaultHeight = 269.773.dp,
       viewportWidth = 92.033f,

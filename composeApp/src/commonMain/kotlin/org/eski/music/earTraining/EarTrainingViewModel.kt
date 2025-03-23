@@ -7,7 +7,6 @@ import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
-import org.eski.music.staff.StaffViewModel
 import org.eski.pitch.ui.game.model.GameState
 import org.eski.ui.views.startButton.StartButtonGameState
 import org.eski.ui.views.startButton.StartButtonViewModel
@@ -43,7 +42,7 @@ class EarTrainingViewModel(
   )
 
   val backButtonVisible = host.earTrainingOpen.map {
-    it && host.earTrainingVisibleOnHomeScreen
+    it && !host.earTrainingVisibleOnHomeScreen
   }.stateIn(viewModelScope, SharingStarted.WhileSubscribed(), false)
 
   fun startGame() {

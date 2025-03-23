@@ -31,6 +31,7 @@ import org.eski.ui.animation.AnimateView
 import org.eski.music.ui.noteInputs.PianoInput
 import org.eski.pitch.ui.game.views.ActionBarMenu
 import org.eski.ui.util.grid2
+import org.eski.ui.views.spacer
 import org.eski.ui.views.startButton.StartButton
 
 @Composable
@@ -63,27 +64,30 @@ fun HomeScreen(
     ) {
 
         Column(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(grid2),
+            modifier = Modifier.fillMaxSize(),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             ActionBarMenu(vm.options)
-            Spacer(modifier = Modifier.height(grid2))
+            spacer(grid2)
 
-            Row(
-                modifier = Modifier.weight(1f),
-                horizontalArrangement = Arrangement.Center
-            ) {
-                Spacer(modifier = Modifier.width(16.dp))
+            Box(modifier = Modifier.fillMaxSize()) {
+                Column {
+                    Row(
+                        modifier = Modifier.weight(1f),
+                        horizontalArrangement = Arrangement.Center
+                    ) {
+                        spacer(grid2)
+                    }
+
+                    Spacer(modifier = Modifier.fillMaxHeight().weight(1f))
+
+                    HomeScreenNoteInput(KeySignature.cMajor, zIndex = 2f)
+                }
+
+                EarTrainingScreen(host = vm, zIndex = 1f)
             }
-
-            Spacer(modifier = Modifier.fillMaxHeight().weight(1f))
-
-            HomeScreenNoteInput(KeySignature.cMajor, zIndex = 2f)
         }
 
-        EarTrainingScreen(host = vm, zIndex = 1f)
 
         ValueForValueButton(
             vm.valueForValue,

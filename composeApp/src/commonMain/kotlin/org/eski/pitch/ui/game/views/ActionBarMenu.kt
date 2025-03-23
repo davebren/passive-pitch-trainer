@@ -24,6 +24,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import org.eski.pitch.ui.game.vm.GameOptionsViewModel
 import org.eski.ui.util.grid
+import org.eski.ui.util.grid2
 import org.eski.ui.util.grid6
 import org.eski.ui.util.gridHalf
 import org.eski.ui.views.spacer
@@ -36,6 +37,7 @@ fun ActionBarMenu(
   Box(modifier = Modifier.fillMaxWidth()) {
     LeftButtons(optionsVm, Modifier.align(alignment = Alignment.CenterStart))
     Column(Modifier.align(alignment = Alignment.Center)) {
+      spacer(grid2)
       Row(modifier = Modifier.align(alignment = Alignment.CenterHorizontally)) {
         Icon(
           modifier = Modifier.align(alignment = Alignment.CenterVertically).size(12.dp),
@@ -94,19 +96,19 @@ fun ActionBarMenu(
     modifier = modifier
       .padding(horizontal = gridHalf)
   ) {
-
-    IconButton(
-      modifier = Modifier
-        .size(grid6)
-        .padding(gridHalf),
-      onClick = { optionsVm.achievementsClicked() }
-    ) {
-      Icon(
-        imageVector = Icons.Default.EmojiEvents,
-        contentDescription = "Achievements",
-        tint = Color.White,
-      )
-    }
+//
+//    IconButton(
+//      modifier = Modifier
+//        .size(grid6)
+//        .padding(gridHalf),
+//      onClick = { optionsVm.achievementsClicked() }
+//    ) {
+//      Icon(
+//        imageVector = Icons.Default.EmojiEvents,
+//        contentDescription = "Achievements",
+//        tint = Color.White,
+//      )
+//    }
 
     IconButton(
       modifier = Modifier

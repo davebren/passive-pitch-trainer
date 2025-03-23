@@ -24,11 +24,11 @@ private val staffEnterAnimation = slideInHorizontally(animationSpec = tween(500,
 private val staffExitAnimation = slideOutHorizontally(animationSpec = tween(500), targetOffsetX = { width -> width })
 
 @Composable
-fun EarTrainingStaff(vm: EarTrainingStaffViewModel, open: Boolean) {
+fun EarTrainingStaff(modifier: Modifier, vm: EarTrainingStaffViewModel, open: Boolean) {
   val hostSize by vm.host.size.collectAsState()
 
   Box(
-    modifier = Modifier.height(staffHeightDoubleClef.output(hostSize.height))
+    modifier = modifier.height(staffHeightDoubleClef.output(hostSize.height))
   ) {
     AnimatedStaff(
       vm = vm,
