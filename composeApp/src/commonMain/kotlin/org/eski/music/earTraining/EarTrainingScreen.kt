@@ -23,10 +23,12 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.zIndex
 import androidx.lifecycle.viewmodel.compose.viewModel
+import org.eski.game.GameSettings
 import org.eski.ui.animation.AnimateView
 import org.eski.ui.util.grid
 import org.eski.ui.util.grid2
 import org.eski.ui.views.QuitButton
+import org.eski.ui.views.feedback.feedbackFlashAnimation
 import org.eski.ui.views.selectors.DropDownSelector
 import org.eski.ui.views.spacer
 import org.eski.ui.views.startButton.StartButton
@@ -36,7 +38,8 @@ import org.eski.ui.views.topWindowInsetSpacer
 @Composable
 fun EarTrainingScreen(
   host: EarTrainingHost,
-  vm: EarTrainingViewModel = viewModel { EarTrainingViewModel(host) },
+  gameSettings: GameSettings,
+  vm: EarTrainingViewModel = viewModel { EarTrainingViewModel(host, gameSettings) },
   zIndex: Float,
   topBarMargin: Dp = 0.dp,
 ) {
@@ -45,7 +48,7 @@ fun EarTrainingScreen(
   val quitButtonVisible by vm.quitButtonVisible.collectAsState()
 
   Box(modifier = Modifier.fillMaxSize()
-    .zIndex(zIndex)
+    .zIndex(zIndex).feedbackFlashAnimation()
   ) {
     val earTrainingLevelSelectorExpanded = remember { mutableStateOf(false) }
 

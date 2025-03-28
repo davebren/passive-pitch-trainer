@@ -11,6 +11,8 @@ import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import org.eski.audio.SoundPlayer
 import org.eski.game.GameMetaState
+import org.eski.game.GameSettings
+import org.eski.ui.views.feedback.FeedbackViewModel
 import org.eski.ui.views.startButton.StartButtonGameState
 import org.eski.ui.views.startButton.StartButtonViewModel
 import passivepitch.composeapp.generated.resources.Res
@@ -18,12 +20,14 @@ import passivepitch.composeapp.generated.resources.go
 
 
 class EarTrainingViewModel(
-  val host: EarTrainingHost
+  val host: EarTrainingHost,
+  gameSettings: GameSettings,
 ): ViewModel() {
   val gameMetaState = MutableStateFlow(GameMetaState.NotStarted)
   val perfectPitchGame = PerfectPitchGameViewModel(viewModelScope, SoundPlayer)
   val options = EarTrainingOptionsViewModel(viewModelScope, gameMetaState)
   val staff = EarTrainingStaffViewModel(viewModelScope, host, gameMetaState, options.levelSelected, perfectPitchGame)
+  val feedback = FeedbackViewModel(gameSettings, perfectPitchGame.feedback)
 
   val startButtonGameState: StateFlow<StartButtonGameState> = gameMetaState.map {
     when(it) {

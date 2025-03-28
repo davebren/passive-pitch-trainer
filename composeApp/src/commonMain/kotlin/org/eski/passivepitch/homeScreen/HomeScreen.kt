@@ -10,13 +10,12 @@ import androidx.compose.ui.layout.onSizeChanged
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import org.eski.music.earTraining.EarTrainingScreen
-import org.eski.music.earTraining.data.keyBindingSettings
-import org.eski.music.earTraining.data.gameStatsData
 import org.eski.music.model.KeySignature
 import org.eski.pitch.ui.game.InfoDialog
 import org.eski.pitch.ui.keybinding.KeyBindingSettings
 import org.eski.pitch.ui.keybinding.KeyBindingSettingsDialog
 import org.eski.game.GameSettings
+import org.eski.intro.IntroSettings
 import org.eski.pitch.ui.game.data.GameStatsData
 import org.eski.ui.views.feedback.feedbackFlashAnimation
 import org.eski.pitch.ui.keybinding.KeyboardInput
@@ -25,11 +24,12 @@ import org.eski.ui.views.spacer
 
 @Composable
 fun HomeScreen(
-    keyBindings: KeyBindingSettings = keyBindingSettings,
-    gameSettings: GameSettings = org.eski.music.earTraining.data.gameSettings,
-    gameStats: GameStatsData = gameStatsData,
+    keyBindings: KeyBindingSettings = org.eski.passivepitch.keyBindingSettings,
+    gameSettings: GameSettings = org.eski.passivepitch.gameSettings,
+    gameStats: GameStatsData = org.eski.passivepitch.gameStatsData,
+    introSettings: IntroSettings = org.eski.passivepitch.introSettings,
     vm: HomeScreenViewModel = viewModel {
-        HomeScreenViewModel(gameSettings, gameStats)
+        HomeScreenViewModel(gameSettings, gameStats, introSettings)
     }
 ) {
 
@@ -74,7 +74,12 @@ fun HomeScreen(
                 }
             }
         }
-        EarTrainingScreen(host = vm, zIndex = 1f, topBarMargin = actionbarHeight.value)
+        EarTrainingScreen(
+            host = vm,
+            zIndex = 1f,
+            topBarMargin = actionbarHeight.value,
+            gameSettings = gameSettings
+        )
 
 //        ValueForValueButton(
 //            vm.valueForValue,

@@ -8,30 +8,21 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.combine
-import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
 import org.eski.music.earTraining.EarTrainingHost
-import org.eski.game.GameSettings
-import org.eski.pitch.ui.game.data.GameStatsData
-import org.eski.game.GameMetaState
+import org.eski.intro.IntroSettings
 import org.eski.ui.views.valueForValue.ValueForValueViewModel
 import org.eski.ui.util.screenDensity
 import org.eski.ui.util.toDp
 
 
 class HomeScreenViewModel(
-  val gameSettings: GameSettings,
-  val stats: GameStatsData,
+  introSettings: IntroSettings,
   override val earTrainingVisibleOnHomeScreen: Boolean = true
 ): ViewModel(), EarTrainingHost {
 
-  val options = HomeScreenOptionsViewModel(viewModelScope)
+  val options = HomeScreenOptionsViewModel(viewModelScope, introSettings)
   val valueForValue = ValueForValueViewModel(viewModelScope)
-
-  val startButtonVisible = MutableStateFlow<Boolean>(true)
-  val gameMetaState = MutableStateFlow<GameMetaState>(GameMetaState.NotStarted)
-  val startButtonClickable: StateFlow<Boolean> = gameMetaState.map { it == GameMetaState.NotStarted }
-    .stateIn(viewModelScope, SharingStarted.WhileSubscribed(), true)
 
   val pixelSize = MutableStateFlow(IntSize.Zero)
   override val size: StateFlow<DpSize> = combine(pixelSize, screenDensity) { pixelSize, density ->

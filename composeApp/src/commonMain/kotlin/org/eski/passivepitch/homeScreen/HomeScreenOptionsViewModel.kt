@@ -5,10 +5,11 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.takeWhile
 import kotlinx.coroutines.launch
-import org.eski.music.earTraining.data.introSettings
+import org.eski.intro.IntroSettings
 
 class HomeScreenOptionsViewModel(
   scope: CoroutineScope,
+  introSettings: IntroSettings,
 ) {
   val introShowing = MutableStateFlow<Boolean>(false)
   val settingsShowing = MutableStateFlow<Boolean>(false)
