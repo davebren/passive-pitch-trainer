@@ -14,8 +14,8 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.sp
-import org.eski.pitch.PlatformType
-import org.eski.pitch.getPlatform
+import org.eski.PlatformType
+import org.eski.getPlatform
 
 
 @Composable

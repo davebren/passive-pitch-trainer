@@ -1,4 +1,4 @@
-package org.eski.pitch
+package org.eski
 
 interface Platform {
   val name: String

@@ -1,4 +1,4 @@
-package org.eski.pitch
+package org.eski
 
 class WasmPlatform: Platform {
     override val name: String = "Web with Kotlin/Wasm"
