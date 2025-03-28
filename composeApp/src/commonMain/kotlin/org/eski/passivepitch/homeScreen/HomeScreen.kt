@@ -26,10 +26,9 @@ import org.eski.ui.views.spacer
 fun HomeScreen(
     keyBindings: KeyBindingSettings = org.eski.passivepitch.keyBindingSettings,
     gameSettings: GameSettings = org.eski.passivepitch.gameSettings,
-    gameStats: GameStatsData = org.eski.passivepitch.gameStatsData,
     introSettings: IntroSettings = org.eski.passivepitch.introSettings,
     vm: HomeScreenViewModel = viewModel {
-        HomeScreenViewModel(gameSettings, gameStats, introSettings)
+        HomeScreenViewModel(introSettings)
     }
 ) {
 
@@ -49,7 +48,6 @@ fun HomeScreen(
             .fillMaxSize()
             .background(color = Color.DarkGray)
             .onSizeChanged { vm.onSizeChanged(it) }
-            .feedbackFlashAnimation()
     ) {
 
         Column(

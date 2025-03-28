@@ -48,7 +48,7 @@ fun EarTrainingScreen(
   val quitButtonVisible by vm.quitButtonVisible.collectAsState()
 
   Box(modifier = Modifier.fillMaxSize()
-    .zIndex(zIndex).feedbackFlashAnimation()
+    .zIndex(zIndex).feedbackFlashAnimation(vm.feedback)
   ) {
     val earTrainingLevelSelectorExpanded = remember { mutableStateOf(false) }
 

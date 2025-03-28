@@ -4,9 +4,9 @@ import android.annotation.SuppressLint
 import android.media.SoundPool
 import android.media.SoundPool.OnLoadCompleteListener
 import org.eski.audio.instruments.PianoAudio
-import org.eski.menoback.R
 import org.eski.music.model.Note
 import org.eski.pitch.AndroidApp
+import org.eski.pitch.R
 
 
 actual object SoundPlayer {

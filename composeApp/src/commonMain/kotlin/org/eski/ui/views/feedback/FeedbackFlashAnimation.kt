@@ -4,6 +4,7 @@ import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.tween
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -19,11 +20,11 @@ import org.eski.game.FeedbackState
 private const val feedbackDurationMillis = 300
 
 @Composable
-fun Modifier.feedbackFlashAnimation(): Modifier = composed {
-  val feedbackState = FeedbackState.none // TODO: Get from viewmodel.
-  val feedbackMode = listOf(FeedbackMode.icon, FeedbackMode.flashBackground) // TODO: Get from viewmodel.
+fun Modifier.feedbackFlashAnimation(vm: FeedbackViewModel): Modifier = composed {
+  val feedbackState by vm.state.collectAsState()
+  val feedbackModes by vm.modesEnabled.collectAsState()
 
-  if (!feedbackMode.contains(FeedbackMode.flashBackground) || feedbackState == FeedbackState.none)
+  if (!feedbackModes.contains(FeedbackMode.flashBackground) || feedbackState == FeedbackState.none)
     return@composed this@composed
 
   var animationTriggered by remember { mutableStateOf(false) }
