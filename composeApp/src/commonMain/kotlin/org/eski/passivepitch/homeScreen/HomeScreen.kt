@@ -16,8 +16,7 @@ import org.eski.pitch.ui.keybinding.KeyBindingSettings
 import org.eski.pitch.ui.keybinding.KeyBindingSettingsDialog
 import org.eski.game.GameSettings
 import org.eski.intro.IntroSettings
-import org.eski.pitch.ui.game.data.GameStatsData
-import org.eski.ui.views.feedback.feedbackFlashAnimation
+import org.eski.pitch.ui.game.data.EarTrainingStatsData
 import org.eski.pitch.ui.keybinding.KeyboardInput
 import org.eski.ui.util.grid2
 import org.eski.ui.views.spacer
@@ -26,6 +25,7 @@ import org.eski.ui.views.spacer
 fun HomeScreen(
     keyBindings: KeyBindingSettings = org.eski.passivepitch.keyBindingSettings,
     gameSettings: GameSettings = org.eski.passivepitch.gameSettings,
+    earTrainingStats: EarTrainingStatsData = org.eski.passivepitch.earTrainingStatsData,
     introSettings: IntroSettings = org.eski.passivepitch.introSettings,
     vm: HomeScreenViewModel = viewModel {
         HomeScreenViewModel(introSettings)
@@ -76,7 +76,8 @@ fun HomeScreen(
             host = vm,
             zIndex = 1f,
             topBarMargin = actionbarHeight.value,
-            gameSettings = gameSettings
+            gameSettings = gameSettings,
+            statsData = earTrainingStats,
         )
 
 //        ValueForValueButton(

@@ -7,7 +7,8 @@ import kotlin.time.DurationUnit
 import kotlin.time.toDuration
 
 data class PerfectPitchLevel(
-  val name: String,
+  val index: Int,
+  val name: String = "Level $index",
   val notes: List<Note>,
   val instruments: List<Instrument>,
   val duration: Duration = 120.toDuration(DurationUnit.SECONDS),
@@ -48,12 +49,12 @@ data class PerfectPitchLevel(
   companion object {
     val levels = listOf(
       PerfectPitchLevel(
-        name = "Level 1",
+        index = 1,
         notes = listOf(Note.c4, Note.a4),
         instruments = listOf(Instrument.piano)
       ),
       PerfectPitchLevel(
-        name = "Level 2",
+        index = 2,
         notes = listOf(Note.c4, Note.a4, Note.c3, Note.a3),
         instruments = listOf(Instrument.piano)
       )

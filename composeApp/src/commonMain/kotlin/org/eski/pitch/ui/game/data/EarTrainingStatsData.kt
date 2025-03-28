@@ -3,17 +3,17 @@ package org.eski.pitch.ui.game.data
 import com.russhwolf.settings.Settings
 import kotlinx.coroutines.flow.MutableStateFlow
 
-class GameStatsData(val settings: Settings) {
+class EarTrainingStatsData(val settings: Settings) {
     companion object {
-        private const val statsKey = "stats.game"
+        private const val statsKey = "stats.earTraining"
+        private const val perfectPitchKey = "$statsKey.perfectPitch"
         private const val gameCountKey = "$statsKey.gameCount"
 
         const val accuracyThreshold = 90f
         const val defaultLevelUnlocked = 2
 
-
-        private fun highScoreKey(durationSeconds: Int, level: Int): String {
-            return "${statsKey}.highscore.$level"
+        private fun perfectPitchHighScoreKey(level: Int): String {
+            return "${perfectPitchKey}.highscore.$level"
         }
     }
 
@@ -21,10 +21,11 @@ class GameStatsData(val settings: Settings) {
     val lastUnlockedLevelUpdate = MutableStateFlow<LastUnlockedLevelUpdate?>(null)
     val gameCount = MutableStateFlow<Int>(getTotalGamesPlayed())
     
-    fun highScore(durationSeconds: Int, level: Int)
-        = settings.getLong(highScoreKey(durationSeconds, level), 0)
-    fun putHighScore(score: Long, durationSeconds: Int, level: Int) {
-        settings.putLong(highScoreKey(durationSeconds, level), score)
+    fun perfectPitchHighScore(level: Int)
+        = settings.getLong(perfectPitchHighScoreKey(level), 0)
+
+    fun putPerfectPitchHighScore(score: Long, level: Int) {
+        settings.putLong(perfectPitchHighScoreKey(level), score)
     }
 
     fun getTotalGamesPlayed(): Int = settings.getInt(gameCountKey, 0)
@@ -34,6 +35,6 @@ class GameStatsData(val settings: Settings) {
         settings.putInt(gameCountKey, gameCount.value)
     }
 
-    data class HighScoreUpdate(val durationSeconds: Int, val level: Int, val score: Long)
-    data class LastUnlockedLevelUpdate(val durationSeconds: Int, val level: Int)
+    data class HighScoreUpdate(val level: Int, val score: Long)
+    data class LastUnlockedLevelUpdate(val level: Int)
 }

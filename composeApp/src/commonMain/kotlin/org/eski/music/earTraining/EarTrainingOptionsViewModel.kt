@@ -8,11 +8,13 @@ import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
 import org.eski.music.earTraining.model.PerfectPitchLevel
 import org.eski.game.GameMetaState
+import org.eski.pitch.ui.game.data.EarTrainingStatsData
 import org.eski.ui.views.selectors.DropdownSelectorViewModel
 
 class EarTrainingOptionsViewModel(
   val scope: CoroutineScope,
   gameMetaState: StateFlow<GameMetaState>,
+  earTrainingStatsData: EarTrainingStatsData,
 ) {
   val levelSelectorVisible = gameMetaState.map { state ->
     state == GameMetaState.NotStarted
@@ -27,6 +29,17 @@ class EarTrainingOptionsViewModel(
     options = levelSelectorOptions,
     onSelectedOption = { (it as? PerfectPitchLevelOption)?.let { levelOption -> levelSelected.value = levelOption.level } }
   )
+
+  val highScoreVisible: StateFlow<Boolean> = gameMetaState.map {
+    when(it) {
+      GameMetaState.NotStarted -> true
+      GameMetaState.Running, GameMetaState.Paused, GameMetaState.GameOver -> false
+    }
+  }.stateIn(scope, SharingStarted.WhileSubscribed(), false)
+
+  val highScoreText: StateFlow<String> = levelSelected.map {
+    earTrainingStatsData.perfectPitchHighScore(it.index).toString()
+  }.stateIn(scope, SharingStarted.WhileSubscribed(), "0")
 
   private class PerfectPitchLevelOption(
     val level: PerfectPitchLevel,

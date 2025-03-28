@@ -24,6 +24,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.zIndex
 import androidx.lifecycle.viewmodel.compose.viewModel
 import org.eski.game.GameSettings
+import org.eski.game.ui.HighScoreCard
+import org.eski.pitch.ui.game.data.EarTrainingStatsData
 import org.eski.ui.animation.AnimateView
 import org.eski.ui.util.grid
 import org.eski.ui.util.grid2
@@ -40,13 +42,16 @@ import org.eski.ui.views.topWindowInsetSpacer
 fun EarTrainingScreen(
   host: EarTrainingHost,
   gameSettings: GameSettings,
-  vm: EarTrainingViewModel = viewModel { EarTrainingViewModel(host, gameSettings) },
+  statsData: EarTrainingStatsData,
+  vm: EarTrainingViewModel = viewModel { EarTrainingViewModel(host, gameSettings, statsData) },
   zIndex: Float,
   topBarMargin: Dp = 0.dp,
 ) {
   val open by host.earTrainingOpen.collectAsState()
   val size by host.size.collectAsState()
   val quitButtonVisible by vm.quitButtonVisible.collectAsState()
+  val highScoreVisible by vm.options.highScoreVisible.collectAsState()
+  val highScore by vm.options.highScoreText.collectAsState()
 
   Box(modifier = Modifier.fillMaxSize()
     .zIndex(zIndex).feedbackFlashAnimation(vm.feedback)
@@ -70,7 +75,10 @@ fun EarTrainingScreen(
           Spacer(modifier = Modifier.height(grid2))
         }
 
-        LevelSelector(vm.options, earTrainingLevelSelectorExpanded)
+        Column(modifier = Modifier.fillMaxSize()) {
+          HighScoreCard(highScoreVisible, highScore, roundedCornerShape = RoundedCornerShape(topEnd = 4.dp, bottomEnd = 4.dp))
+          LevelSelector(vm.options, earTrainingLevelSelectorExpanded)
+        }
       }
     }
     FeedbackIconAnimation(vm.feedback)
