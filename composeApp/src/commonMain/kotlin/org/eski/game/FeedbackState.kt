@@ -1,4 +1,4 @@
-package org.eski.pitch.ui.game.model
+package org.eski.game
 
 enum class FeedbackState {
     correct,

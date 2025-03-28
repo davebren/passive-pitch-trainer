@@ -1,4 +1,4 @@
-package org.eski.pitch.ui.game.data
+package org.eski.intro
 
 import com.russhwolf.settings.Settings
 import kotlinx.coroutines.flow.MutableStateFlow

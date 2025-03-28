@@ -7,7 +7,7 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
 import org.eski.music.earTraining.model.PerfectPitchLevel
-import org.eski.pitch.ui.game.model.GameMetaState
+import org.eski.game.GameMetaState
 import org.eski.ui.views.selectors.DropdownSelectorViewModel
 
 class EarTrainingOptionsViewModel(

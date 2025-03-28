@@ -2,9 +2,9 @@ package org.eski.music.earTraining.data
 
 import com.russhwolf.settings.Settings
 import org.eski.pitch.ui.keybinding.KeyBindingSettings
-import org.eski.pitch.ui.game.data.GameSettings
+import org.eski.game.GameSettings
 import org.eski.pitch.ui.game.data.GameStatsData
-import org.eski.pitch.ui.game.data.IntroSettings
+import org.eski.intro.IntroSettings
 
 internal val settings = Settings()
 

@@ -16,9 +16,9 @@ import org.eski.music.model.KeySignature
 import org.eski.pitch.ui.game.InfoDialog
 import org.eski.pitch.ui.keybinding.KeyBindingSettings
 import org.eski.pitch.ui.keybinding.KeyBindingSettingsDialog
-import org.eski.pitch.ui.game.data.GameSettings
+import org.eski.game.GameSettings
 import org.eski.pitch.ui.game.data.GameStatsData
-import org.eski.pitch.ui.game.views.feedback.feedbackFlashAnimation
+import org.eski.ui.views.feedback.feedbackFlashAnimation
 import org.eski.pitch.ui.keybinding.KeyboardInput
 import org.eski.ui.util.grid2
 import org.eski.ui.views.spacer

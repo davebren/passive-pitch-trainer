@@ -11,10 +11,10 @@ import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
 import org.eski.music.earTraining.EarTrainingHost
-import org.eski.pitch.ui.game.data.GameSettings
+import org.eski.game.GameSettings
 import org.eski.pitch.ui.game.data.GameStatsData
-import org.eski.pitch.ui.game.model.GameMetaState
-import org.eski.pitch.ui.game.vm.ValueForValueViewModel
+import org.eski.game.GameMetaState
+import org.eski.ui.views.valueForValue.ValueForValueViewModel
 import org.eski.ui.util.screenDensity
 import org.eski.ui.util.toDp
 

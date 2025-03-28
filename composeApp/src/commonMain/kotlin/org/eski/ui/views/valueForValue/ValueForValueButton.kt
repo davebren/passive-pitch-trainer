@@ -1,4 +1,4 @@
-package org.eski.pitch.ui.game.views.valueForValue
+package org.eski.ui.views.valueForValue
 
 import androidx.compose.animation.core.animateDp
 import androidx.compose.animation.core.tween
@@ -20,13 +20,10 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.unit.DpOffset
 import androidx.compose.ui.unit.DpSize
-import androidx.compose.ui.unit.IntSize
 import androidx.compose.ui.unit.dp
 import org.eski.ui.animation.AnimateView
-import org.eski.pitch.ui.game.vm.ValueForValueViewModel
 import org.eski.ui.util.grid2
 import org.eski.ui.util.grid6
 import org.eski.ui.util.grid8

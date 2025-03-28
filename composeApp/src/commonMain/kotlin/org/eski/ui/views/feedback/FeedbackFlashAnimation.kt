@@ -1,4 +1,4 @@
-package org.eski.pitch.ui.game.views.feedback
+package org.eski.ui.views.feedback
 
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.tween
@@ -13,8 +13,8 @@ import androidx.compose.ui.composed
 import androidx.compose.ui.draw.drawBehind
 import androidx.compose.ui.graphics.Color
 import kotlinx.coroutines.delay
-import org.eski.pitch.ui.game.model.FeedbackMode
-import org.eski.pitch.ui.game.model.FeedbackState
+import org.eski.game.FeedbackMode
+import org.eski.game.FeedbackState
 
 private const val feedbackDurationMillis = 300
 

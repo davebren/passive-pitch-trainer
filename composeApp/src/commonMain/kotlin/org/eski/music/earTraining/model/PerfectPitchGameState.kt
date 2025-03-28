@@ -4,8 +4,8 @@ import kotlinx.datetime.Clock
 import kotlinx.datetime.Instant
 import org.eski.music.model.Instrument
 import org.eski.music.model.Note
-import org.eski.pitch.ui.game.model.FeedbackState
-import org.eski.pitch.ui.game.model.FeedbackState.*
+import org.eski.game.FeedbackState
+import org.eski.game.FeedbackState.*
 
 data class PerfectPitchGameState(
   val level: PerfectPitchLevel,

@@ -10,7 +10,7 @@ import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import org.eski.audio.SoundPlayer
-import org.eski.pitch.ui.game.model.GameMetaState
+import org.eski.game.GameMetaState
 import org.eski.ui.views.startButton.StartButtonGameState
 import org.eski.ui.views.startButton.StartButtonViewModel
 import passivepitch.composeapp.generated.resources.Res

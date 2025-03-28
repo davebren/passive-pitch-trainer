@@ -13,7 +13,7 @@ import org.eski.music.model.Note
 import org.eski.music.staff.StaffColors
 import org.eski.music.staff.StaffNote
 import org.eski.music.staff.StaffViewModel
-import org.eski.pitch.ui.game.model.GameMetaState
+import org.eski.game.GameMetaState
 
 class EarTrainingStaffViewModel(
   val scope: CoroutineScope,

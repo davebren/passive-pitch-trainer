@@ -27,8 +27,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.Dialog
 import androidx.compose.ui.window.DialogProperties
-import org.eski.pitch.ui.game.data.GameSettings
-import org.eski.pitch.ui.game.model.FeedbackMode
+import org.eski.game.GameSettings
+import org.eski.game.FeedbackMode
 import org.eski.ui.views.text.CenteredVerticalText
 import org.eski.util.getKeyName
 

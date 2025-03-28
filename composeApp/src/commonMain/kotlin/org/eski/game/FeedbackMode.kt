@@ -1,4 +1,4 @@
-package org.eski.pitch.ui.game.model
+package org.eski.game
 
 import kotlinx.serialization.Serializable
 import org.eski.util.SettingsEnum

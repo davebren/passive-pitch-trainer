@@ -1,9 +1,8 @@
-package org.eski.pitch.ui.game.data
+package org.eski.game
 
 import com.russhwolf.settings.Settings
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.flow.MutableStateFlow
-import org.eski.pitch.ui.game.model.FeedbackMode
 import org.eski.util.safeJsonDecode
 import org.eski.util.safeJsonEncode
 

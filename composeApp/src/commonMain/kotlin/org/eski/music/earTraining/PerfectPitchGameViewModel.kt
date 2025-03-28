@@ -16,7 +16,7 @@ import org.eski.music.earTraining.model.NoteFeedback
 import org.eski.music.earTraining.model.PerfectPitchGameState
 import org.eski.music.earTraining.model.PerfectPitchLevel
 import org.eski.music.ui.noteInputs.NoteInputs
-import org.eski.pitch.ui.game.model.FeedbackState
+import org.eski.game.FeedbackState
 
 class PerfectPitchGameViewModel(val scope: CoroutineScope, val soundPlayer: SoundPlayer) {
   val gameState = MutableStateFlow<PerfectPitchGameState?>(null)
