@@ -5,9 +5,12 @@ import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
-import org.eski.pitch.ui.game.model.GameState
+import kotlinx.coroutines.launch
+import org.eski.audio.SoundPlayer
+import org.eski.pitch.ui.game.model.GameMetaState
 import org.eski.ui.views.startButton.StartButtonGameState
 import org.eski.ui.views.startButton.StartButtonViewModel
 import passivepitch.composeapp.generated.resources.Res
@@ -17,20 +20,23 @@ import passivepitch.composeapp.generated.resources.go
 class EarTrainingViewModel(
   val host: EarTrainingHost
 ): ViewModel() {
-  val gameState = MutableStateFlow(GameState.NotStarted)
-  val options = EarTrainingOptionsViewModel(viewModelScope, gameState)
-  val staff = EarTrainingStaffViewModel(viewModelScope, host, gameState, options.levelSelected)
+  val gameMetaState = MutableStateFlow(GameMetaState.NotStarted)
+  val perfectPitchGame = PerfectPitchGameViewModel(viewModelScope, SoundPlayer)
+  val options = EarTrainingOptionsViewModel(viewModelScope, gameMetaState)
+  val staff = EarTrainingStaffViewModel(viewModelScope, host, gameMetaState, options.levelSelected, perfectPitchGame)
 
-  val startButtonGameState: StateFlow<StartButtonGameState> = gameState.map {
+  val startButtonGameState: StateFlow<StartButtonGameState> = gameMetaState.map {
     when(it) {
-      GameState.NotStarted -> StartButtonGameState.NotStarted
-      GameState.Running -> StartButtonGameState.Running
-      GameState.Paused -> StartButtonGameState.Paused
-      GameState.GameOver -> StartButtonGameState.GameOver
+      GameMetaState.NotStarted -> StartButtonGameState.NotStarted
+      GameMetaState.Running -> StartButtonGameState.Running
+      GameMetaState.Paused -> StartButtonGameState.Paused
+      GameMetaState.GameOver -> StartButtonGameState.GameOver
     }
   }.stateIn(viewModelScope, SharingStarted.WhileSubscribed(), StartButtonGameState.NotStarted)
-  val instructionsHeader = MutableStateFlow<String>("header") // TODO:
-  val instructionsSubtext = MutableStateFlow<String>("subtext") // TODO:
+  val instructionsHeader = options.levelSelected.map {
+    "Perfect Pitch - ${it.name}"
+  }.stateIn(viewModelScope, SharingStarted.WhileSubscribed(), "")
+  val instructionsSubtext = MutableStateFlow<String>("Select the correct note after it is played.")
 
   val startButton = StartButtonViewModel(
     scope = viewModelScope,
@@ -46,12 +52,23 @@ class EarTrainingViewModel(
     it && !host.earTrainingVisibleOnHomeScreen
   }.stateIn(viewModelScope, SharingStarted.WhileSubscribed(), false)
 
+  init {
+    viewModelScope.launch {
+      perfectPitchGame.gameState.collectLatest { state ->
+        if (gameMetaState.value == GameMetaState.Running && state?.ended == true) {
+          gameMetaState.value = GameMetaState.GameOver
+        }
+      }
+    }
+  }
+
   fun startGame() {
-    gameState.value = GameState.Running
+    gameMetaState.value = GameMetaState.Running
+    perfectPitchGame.startGame(options.levelSelected.value)
   }
 
   fun postGameDismissed() {
-    gameState.value = GameState.NotStarted
+    gameMetaState.value = GameMetaState.NotStarted
   }
 
   fun backClicked() {

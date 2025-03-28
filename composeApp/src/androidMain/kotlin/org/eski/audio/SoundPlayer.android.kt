@@ -38,7 +38,7 @@ actual object SoundPlayer {
 
   fun init() {}
 
-  actual fun playNote(note: Note) {
+  actual fun playNote(note: Note, muteable: Boolean) {
 //    if (AudioSettings.muted.value) return
 
     noteIdMap[note]?.let { soundPool.play(it, 0.99f, 0.99f, 1, 0, 1f) }

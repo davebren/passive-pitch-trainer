@@ -31,6 +31,7 @@ import org.eski.ui.views.spacer
 import org.eski.ui.views.startButton.StartButton
 import org.eski.ui.views.topWindowInsetSpacer
 
+
 @Composable
 fun EarTrainingScreen(
   host: EarTrainingHost,

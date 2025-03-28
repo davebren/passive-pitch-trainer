@@ -17,7 +17,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.sp
 import androidx.compose.animation.core.tween
-import org.eski.pitch.ui.game.model.GameState
+import org.eski.pitch.ui.game.model.GameMetaState
 import org.eski.passivepitch.homeScreen.HomeScreenViewModel
 
 @Composable
@@ -25,11 +25,11 @@ fun PauseOverlay(
     vm: HomeScreenViewModel,
     modifier: Modifier = Modifier
 ) {
-    val gameState by vm.gameState.collectAsState()
+    val gameState by vm.gameMetaState.collectAsState()
 
     // Only display the overlay when the game is paused
     AnimatedVisibility(
-        visible = gameState == GameState.Paused,
+        visible = gameState == GameMetaState.Paused,
         enter = fadeIn(animationSpec = tween(300)),
         exit = fadeOut(animationSpec = tween(300)),
         modifier = modifier

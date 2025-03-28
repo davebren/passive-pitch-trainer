@@ -13,7 +13,7 @@ import kotlinx.coroutines.flow.stateIn
 import org.eski.music.earTraining.EarTrainingHost
 import org.eski.pitch.ui.game.data.GameSettings
 import org.eski.pitch.ui.game.data.GameStatsData
-import org.eski.pitch.ui.game.model.GameState
+import org.eski.pitch.ui.game.model.GameMetaState
 import org.eski.pitch.ui.game.vm.ValueForValueViewModel
 import org.eski.ui.util.screenDensity
 import org.eski.ui.util.toDp
@@ -29,8 +29,8 @@ class HomeScreenViewModel(
   val valueForValue = ValueForValueViewModel(viewModelScope)
 
   val startButtonVisible = MutableStateFlow<Boolean>(true)
-  val gameState = MutableStateFlow<GameState>(GameState.NotStarted)
-  val startButtonClickable: StateFlow<Boolean> = gameState.map { it == GameState.NotStarted }
+  val gameMetaState = MutableStateFlow<GameMetaState>(GameMetaState.NotStarted)
+  val startButtonClickable: StateFlow<Boolean> = gameMetaState.map { it == GameMetaState.NotStarted }
     .stateIn(viewModelScope, SharingStarted.WhileSubscribed(), true)
 
   val pixelSize = MutableStateFlow(IntSize.Zero)

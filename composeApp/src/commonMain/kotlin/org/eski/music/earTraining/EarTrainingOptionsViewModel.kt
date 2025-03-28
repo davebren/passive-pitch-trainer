@@ -7,15 +7,15 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
 import org.eski.music.earTraining.model.PerfectPitchLevel
-import org.eski.pitch.ui.game.model.GameState
+import org.eski.pitch.ui.game.model.GameMetaState
 import org.eski.ui.views.selectors.DropdownSelectorViewModel
 
 class EarTrainingOptionsViewModel(
   val scope: CoroutineScope,
-  gameState: StateFlow<GameState>,
+  gameMetaState: StateFlow<GameMetaState>,
 ) {
-  val levelSelectorVisible = gameState.map { state ->
-    state == GameState.NotStarted
+  val levelSelectorVisible = gameMetaState.map { state ->
+    state == GameMetaState.NotStarted
   }.stateIn(scope, SharingStarted.WhileSubscribed(), true)
   val levelSelected = MutableStateFlow<PerfectPitchLevel>(PerfectPitchLevel.levels.first()) // TODO:
   val levelSelectedName = levelSelected.map { it.name }.stateIn(scope, SharingStarted.WhileSubscribed(), "")

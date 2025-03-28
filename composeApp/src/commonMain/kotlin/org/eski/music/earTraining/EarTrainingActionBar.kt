@@ -36,7 +36,6 @@ fun EarTrainingActionBar(vm: EarTrainingViewModel) {
   }
 }
 
-
 @Composable
 private fun BackButton(vm: EarTrainingViewModel) {
   val visible by vm.backButtonVisible.collectAsState()

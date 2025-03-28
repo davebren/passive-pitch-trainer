@@ -9,19 +9,20 @@ import java.io.BufferedInputStream
 
 
 actual object SoundPlayer {
-  actual fun playNote(note: Note) {
-//    if (AudioSettings.muted.value) return
+  actual fun playNote(note: Note, muteable: Boolean) {
+//    if (muteable && AudioSettings.muted.value) return
+    println("playNote")
 
     val fileName = if (note.natural()) {
       "${note.nameo[0].lowercaseChar()}${note.octave}"
     } else "${note.nameFlat[0].lowercaseChar()}b${note.octave}"
 
-    playSoundFromResource("/composeResources/music.composeapp.generated.resources/files/notes/piano/${fileName}.mp3")
+    playSoundFromResource("/composeResources/passivepitch.composeapp.generated.resources/files/notes/piano/${fileName}.mp3")
   }
 
   actual fun playSoundEffect(soundEffect: SoundEffect) {
 //    if (AudioSettings.muted.value) return
-    playSoundFromResource("/composeResources/music.composeapp.generated.resources/files/soundEffects/${soundEffect.fileName}")
+    playSoundFromResource("/composeResources/passivepitch.composeapp.generated.resources/files/soundEffects/${soundEffect.fileName}")
   }
 
   private fun playSoundFromResource(jarRelativePath: String) {
@@ -34,6 +35,7 @@ actual object SoundPlayer {
             player.play()
           }
       } catch (error: Exception) {
+        print(error)
         // TODO: Do something.
       }
     }

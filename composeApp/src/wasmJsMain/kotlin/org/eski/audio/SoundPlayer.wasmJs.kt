@@ -37,7 +37,7 @@ actual object SoundPlayer {
     }
   }
 
-  actual fun playNote(note: Note) {
+  actual fun playNote(note: Note, muteable: Boolean) {
 //    if (AudioSettings.muted.value) return
     cachedNotes[note]?.let { playFromCache(it, 5000L) }
   }

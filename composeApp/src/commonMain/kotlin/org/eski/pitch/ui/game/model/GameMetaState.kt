@@ -1,6 +1,6 @@
 package org.eski.pitch.ui.game.model
 
-enum class GameState {
+enum class GameMetaState {
   NotStarted,
   Running,
   Paused,
