@@ -28,6 +28,7 @@ import org.eski.ui.animation.AnimateView
 import org.eski.ui.util.grid
 import org.eski.ui.util.grid2
 import org.eski.ui.views.QuitButton
+import org.eski.ui.views.feedback.FeedbackIconAnimation
 import org.eski.ui.views.feedback.feedbackFlashAnimation
 import org.eski.ui.views.selectors.DropDownSelector
 import org.eski.ui.views.spacer
@@ -72,6 +73,7 @@ fun EarTrainingScreen(
         LevelSelector(vm.options, earTrainingLevelSelectorExpanded)
       }
     }
+    FeedbackIconAnimation(vm.feedback)
 
     QuitButton(visible = quitButtonVisible, containerSize = size, onExpanded = { vm.quitClicked() })
     StartButton(vm = vm.startButton, size)

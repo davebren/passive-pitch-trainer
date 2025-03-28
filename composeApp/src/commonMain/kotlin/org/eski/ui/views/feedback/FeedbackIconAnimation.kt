@@ -10,6 +10,7 @@ import androidx.compose.material.icons.filled.Check
 import androidx.compose.material.icons.filled.Clear
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -23,11 +24,11 @@ import org.eski.game.FeedbackState
 
 private const val feedbackDurationMillis = 500
 
-@Composable fun BoxScope.FeedbackIconAnimation() {
-  val feedbackState = FeedbackState.none // TODO: Get from viewmodel.
-  val feedbackMode = listOf(FeedbackMode.icon, FeedbackMode.flashBackground) // TODO: Get from viewmodel.
+@Composable fun BoxScope.FeedbackIconAnimation(vm: FeedbackViewModel) {
+  val feedbackState by vm.state.collectAsState()
+  val feedbackModes by vm.modesEnabled.collectAsState()
 
-  if (!feedbackMode.contains(FeedbackMode.icon) || feedbackState == FeedbackState.none) return
+  if (!feedbackModes.contains(FeedbackMode.icon) || feedbackState == FeedbackState.none) return
 
   var animationTriggered by remember { mutableStateOf(false) }
   val animationAlpha by animateFloatAsState(

@@ -58,7 +58,7 @@ data class PerfectPitchGameState(
       end()
     } else this
   }
-  fun end(): PerfectPitchGameState = copy(currentPromptNote = null, ended = true)
+  fun end(): PerfectPitchGameState = copy(currentPromptNote = null, ended = true, feedback = none)
 
   fun previousNote(): Pair<Note, Instrument>? = previousNotes.lastOrNull()
 }
