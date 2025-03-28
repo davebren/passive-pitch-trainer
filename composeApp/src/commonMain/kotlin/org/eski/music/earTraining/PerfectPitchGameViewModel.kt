@@ -102,4 +102,9 @@ class PerfectPitchGameViewModel(val scope: CoroutineScope, val soundPlayer: Soun
     gameState.value = gameState.value?.incorrectUpdate()
     nextPrompt(false)
   }
+
+  fun quit() {
+    currentPromptJob?.cancel()
+    gameState.value = gameState.value?.end()
+  }
 }

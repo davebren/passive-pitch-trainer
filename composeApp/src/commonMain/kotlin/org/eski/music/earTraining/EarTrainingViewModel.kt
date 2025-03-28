@@ -48,8 +48,15 @@ class EarTrainingViewModel(
     onPostGameDismissed = { postGameDismissed() }
   )
 
-  val backButtonVisible = host.earTrainingOpen.map {
+  val backButtonVisible: StateFlow<Boolean> = host.earTrainingOpen.map {
     it && !host.earTrainingVisibleOnHomeScreen
+  }.stateIn(viewModelScope, SharingStarted.WhileSubscribed(), false)
+
+  val quitButtonVisible: StateFlow<Boolean> = gameMetaState.map {
+    when(it) {
+      GameMetaState.NotStarted, GameMetaState.Running -> false
+      GameMetaState.Paused, GameMetaState.GameOver -> true
+    }
   }.stateIn(viewModelScope, SharingStarted.WhileSubscribed(), false)
 
   init {
@@ -65,6 +72,17 @@ class EarTrainingViewModel(
   fun startGame() {
     gameMetaState.value = GameMetaState.Running
     perfectPitchGame.startGame(options.levelSelected.value)
+  }
+
+  fun quitClicked() {
+    when(gameMetaState.value) {
+      GameMetaState.NotStarted -> {}
+      GameMetaState.Running, GameMetaState.Paused -> {
+        perfectPitchGame.quit()
+        postGameDismissed()
+      }
+      GameMetaState.GameOver -> { postGameDismissed() }
+    }
   }
 
   fun postGameDismissed() {

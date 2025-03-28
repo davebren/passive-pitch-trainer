@@ -26,6 +26,7 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import org.eski.ui.animation.AnimateView
 import org.eski.ui.util.grid
 import org.eski.ui.util.grid2
+import org.eski.ui.views.QuitButton
 import org.eski.ui.views.selectors.DropDownSelector
 import org.eski.ui.views.spacer
 import org.eski.ui.views.startButton.StartButton
@@ -41,6 +42,7 @@ fun EarTrainingScreen(
 ) {
   val open by host.earTrainingOpen.collectAsState()
   val size by host.size.collectAsState()
+  val quitButtonVisible by vm.quitButtonVisible.collectAsState()
 
   Box(modifier = Modifier.fillMaxSize()
     .zIndex(zIndex)
@@ -68,6 +70,7 @@ fun EarTrainingScreen(
       }
     }
 
+    QuitButton(visible = quitButtonVisible, containerSize = size, onExpanded = { vm.quitClicked() })
     StartButton(vm = vm.startButton, size)
   }
 }
