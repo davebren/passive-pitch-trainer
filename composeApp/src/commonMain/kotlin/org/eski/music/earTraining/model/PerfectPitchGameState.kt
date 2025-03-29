@@ -6,6 +6,7 @@ import org.eski.music.model.Instrument
 import org.eski.music.model.Note
 import org.eski.game.FeedbackState
 import org.eski.game.FeedbackState.*
+import kotlin.math.min
 
 data class PerfectPitchGameState(
   val level: PerfectPitchLevel,
@@ -14,6 +15,8 @@ data class PerfectPitchGameState(
   val currentPromptNote: Pair<Note, Instrument>? = null,
   val correctCount: Int = 0,
   val incorrectCount: Int = 0,
+  val streak: Int = 0,
+  val score: Int = 0,
   val feedback: FeedbackState = none,
   val startTime: Instant = Clock.System.now(),
   val ended: Boolean = false,
@@ -43,13 +46,16 @@ data class PerfectPitchGameState(
   fun correctUpdate(): PerfectPitchGameState = copy(
     currentPromptNote = null,
     previousNotes = currentPromptNote?.let { previousNotes.plus(it) } ?: previousNotes,
-    correctCount = correctCount +1,
+    correctCount = correctCount + 1,
+    streak = streak + 1,
+    score = score + (min(10, streak + 1) * 10),
     feedback = correct,
   )
   fun incorrectUpdate(): PerfectPitchGameState = copy(
     currentPromptNote = null,
     previousNotes = currentPromptNote?.let { previousNotes.plus(it) } ?: previousNotes,
     incorrectCount = incorrectCount +1,
+    streak = 0,
     feedback = incorrect,
   )
 

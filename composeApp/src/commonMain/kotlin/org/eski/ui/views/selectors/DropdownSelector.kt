@@ -12,6 +12,7 @@ import androidx.compose.foundation.layout.defaultMinSize
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
@@ -30,6 +31,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.zIndex
@@ -50,7 +52,8 @@ fun DropDownSelector(
   expanded: MutableState<Boolean> = mutableStateOf(false),
   background: Color = Color.White,
   textColor: Color = Color.DarkGray,
-  roundedCornerShape: RoundedCornerShape = RoundedCornerShape(topStart = 4.dp, bottomStart = 4.dp)
+  roundedCornerShape: RoundedCornerShape = RoundedCornerShape(topStart = 4.dp, bottomStart = 4.dp),
+  maxDropdownHeight: Dp? = 320.dp
 ) {
   val selectedName by vmx.selectedName.collectAsState()
   val options by vmx.options.collectAsState()
@@ -80,11 +83,12 @@ fun DropDownSelector(
       enter = expandVertically(animationSpec = tween(300, 0), initialHeight = { fullHeight -> 0 }),
       exit = shrinkVertically(animationSpec = tween(300), targetHeight = { fullHeight -> 0 })
     ) {
+      val heightModifier = maxDropdownHeight?.let { Modifier.heightIn(max = it) } ?: Modifier.fillMaxHeight()
+
       Card(
         backgroundColor = background,
         elevation = 16.dp,
-        modifier = Modifier
-          .fillMaxHeight()
+        modifier = heightModifier
           .padding(bottom = grid)
           .width(120.dp)
           .zIndex(501f)
@@ -93,7 +97,9 @@ fun DropDownSelector(
         val state = rememberScrollAreaState(lazyListState)
 
         ScrollArea(state = state) {
-          LazyColumn(state = lazyListState, modifier = Modifier.fillMaxSize()) {
+          LazyColumn(
+            state = lazyListState,
+          ) {
             options.forEachIndexed { index, option ->
               item {
                 CenteredVerticalText(

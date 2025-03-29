@@ -9,6 +9,7 @@ import kotlin.time.toDuration
 data class PerfectPitchLevel(
   val index: Int,
   val name: String = "Level $index",
+  val subtextUnformatted: String,
   val notes: List<Note>,
   val instruments: List<Instrument>,
   val duration: Duration = 120.toDuration(DurationUnit.SECONDS),
@@ -46,18 +47,70 @@ data class PerfectPitchLevel(
     return newNotes
   }
 
+  fun subtext() = subtextUnformatted.replace("{instruments}", instruments.joinToString(", "))
+
   companion object {
     val levels = listOf(
       PerfectPitchLevel(
         index = 1,
         notes = listOf(Note.c4, Note.a4),
-        instruments = listOf(Instrument.piano)
+        instruments = listOf(Instrument.piano),
+        subtextUnformatted = "A, C | 1 | {instruments}",
       ),
       PerfectPitchLevel(
         index = 2,
         notes = listOf(Note.c4, Note.a4, Note.c3, Note.a3),
-        instruments = listOf(Instrument.piano)
-      )
+        instruments = listOf(Instrument.piano),
+        subtextUnformatted = "A, C | 2 | {instruments}"
+      ),
+      PerfectPitchLevel(
+        index = 3,
+        notes = listOf(Note.c4, Note.a4, Note.c3, Note.a3, Note.c5, Note.a5),
+        instruments = listOf(Instrument.piano),
+        subtextUnformatted = "A, C | 3 | {instruments}"
+      ),
+      PerfectPitchLevel(
+        index = 4,
+        notes = listOf(Note.c4, Note.a4, Note.c3, Note.a3, Note.c5, Note.a5, Note.c2, Note.a2),
+        instruments = listOf(Instrument.piano),
+        subtextUnformatted = "A, C | 4 | {instruments}"
+      ),
+      PerfectPitchLevel(
+        index = 5,
+        notes = listOf(Note.c4, Note.a4, Note.c3, Note.a3, Note.c5, Note.a5, Note.c2, Note.a2),
+        instruments = listOf(Instrument.piano),
+        subtextUnformatted = "A, C | 5 | {instruments}"
+      ),
+      PerfectPitchLevel(
+        index = 6,
+        notes = listOf(Note.c4, Note.e4, Note.c3, Note.e3, Note.c5, Note.e5, Note.c2, Note.e2),
+        instruments = listOf(Instrument.piano),
+        subtextUnformatted = "C, E | 1 | {instruments}"
+      ),
+      PerfectPitchLevel(
+        index = 7,
+        notes = listOf(Note.e4, Note.a4, Note.e3, Note.a3, Note.e5, Note.a5, Note.e2, Note.a2),
+        instruments = listOf(Instrument.piano),
+        subtextUnformatted = "A, E | 1 | {instruments}"
+      ),
+      PerfectPitchLevel(
+        index = 8,
+        notes = listOf(Note.e4, Note.a4, Note.c4),
+        instruments = listOf(Instrument.piano),
+        subtextUnformatted = "A, C, E | 1 | {instruments}"
+      ),
+      PerfectPitchLevel(
+        index = 9,
+        notes = listOf(Note.e4, Note.a4, Note.c4, Note.e3, Note.a3, Note.c3),
+        instruments = listOf(Instrument.piano),
+        subtextUnformatted = "A, C, E | 2 | {instruments}"
+      ),
+      PerfectPitchLevel(
+        index = 10,
+        notes = listOf(Note.e4, Note.a4, Note.c4, Note.e3, Note.a3, Note.c3),
+        instruments = listOf(Instrument.piano),
+        subtextUnformatted = "A, C, E | 2 | {instruments}"
+      ),
     )
   }
 }

@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material.Icon
@@ -50,9 +51,9 @@ fun ActionBarMenu(
       spacer(grid2)
       Row(modifier = Modifier.align(alignment = Alignment.CenterHorizontally)) {
         Icon(
-          modifier = Modifier.align(alignment = Alignment.CenterVertically).size(12.dp),
+          modifier = Modifier.align(alignment = Alignment.CenterVertically).size(grid2),
           imageVector = Icons.Filled.MusicNote, contentDescription = "",
-          tint = Color.Red
+          tint = Color.Yellow
         )
         spacer(width = grid)
         Text(
@@ -62,13 +63,13 @@ fun ActionBarMenu(
         )
         spacer(width = grid)
         Icon(
-          modifier = Modifier.align(alignment = Alignment.CenterVertically).size(12.dp),
+          modifier = Modifier.align(alignment = Alignment.CenterVertically).size(grid2),
           imageVector = Icons.Filled.MusicNote, contentDescription = "",
-          tint = Color.Red
+          tint = Color.Yellow
         )
       }
       Text(
-        modifier = Modifier.align(alignment = Alignment.CenterHorizontally),
+        modifier = Modifier.align(alignment = Alignment.CenterHorizontally).offset(y = -grid),
         text = "by David Breneisen",
         fontSize = 12.sp,
         color = Color.LightGray,

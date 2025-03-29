@@ -1,9 +1,15 @@
-package org.eski.music.earTraining
+package org.eski.music.earTraining.options
 
+import androidx.compose.ui.text.AnnotatedString
+import androidx.compose.ui.text.SpanStyle
+import androidx.compose.ui.text.buildAnnotatedString
+import androidx.compose.ui.text.withStyle
+import kotlinx.atomicfu.TraceBase.None.append
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
 import org.eski.music.earTraining.model.PerfectPitchLevel
@@ -16,6 +22,8 @@ class EarTrainingOptionsViewModel(
   gameMetaState: StateFlow<GameMetaState>,
   earTrainingStatsData: EarTrainingStatsData,
 ) {
+  val optionColors = MutableStateFlow<EarTrainingOptionColors>(EarTrainingOptionColors())
+
   val levelSelectorVisible = gameMetaState.map { state ->
     state == GameMetaState.NotStarted
   }.stateIn(scope, SharingStarted.WhileSubscribed(), true)
@@ -29,6 +37,22 @@ class EarTrainingOptionsViewModel(
     options = levelSelectorOptions,
     onSelectedOption = { (it as? PerfectPitchLevelOption)?.let { levelOption -> levelSelected.value = levelOption.level } }
   )
+  val levelSubtext = levelSelected.map { it.subtext() }
+    .stateIn(scope, SharingStarted.WhileSubscribed(), "")
+  val levelSubtextAnnotated: StateFlow<AnnotatedString> = combine(levelSubtext, optionColors) { text, colors ->
+    val textParts = text.split('|')
+
+    buildAnnotatedString {
+      textParts.forEachIndexed { index, textPart ->
+        append(textPart)
+        if (index == textParts.size - 1) return@forEachIndexed
+
+        withStyle(style = SpanStyle(colors.textDivider)) {
+          append('|')
+        }
+      }
+    }
+  }.stateIn(scope, SharingStarted.WhileSubscribed(), AnnotatedString(""))
 
   val highScoreVisible: StateFlow<Boolean> = gameMetaState.map {
     when(it) {

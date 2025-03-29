@@ -12,6 +12,7 @@ import kotlinx.coroutines.launch
 import org.eski.audio.SoundPlayer
 import org.eski.game.GameMetaState
 import org.eski.game.GameSettings
+import org.eski.music.earTraining.options.EarTrainingOptionsViewModel
 import org.eski.pitch.ui.game.data.EarTrainingStatsData
 import org.eski.ui.views.feedback.FeedbackViewModel
 import org.eski.ui.views.startButton.StartButtonGameState
@@ -30,6 +31,7 @@ class EarTrainingViewModel(
   val options = EarTrainingOptionsViewModel(viewModelScope, gameMetaState, statsData)
   val staff = EarTrainingStaffViewModel(viewModelScope, host, gameMetaState, options.levelSelected, perfectPitchGame)
   val feedback = FeedbackViewModel(gameSettings, perfectPitchGame.feedback)
+  val scoreCard = EarTrainingScoreCardViewModel(viewModelScope, gameMetaState, perfectPitchGame)
 
   val startButtonGameState: StateFlow<StartButtonGameState> = gameMetaState.map {
     when(it) {

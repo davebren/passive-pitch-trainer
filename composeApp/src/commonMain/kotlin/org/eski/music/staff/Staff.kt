@@ -24,6 +24,7 @@ import org.eski.music.model.StaffConfig
 import org.eski.ui.util.SizeCascade
 import org.eski.ui.util.grid
 import kotlin.math.max
+import kotlin.math.min
 
 
 @Composable
@@ -102,7 +103,7 @@ class StaffDimens(
   val noteStartX = signatureStartX + max(clefHeight, max(flatXInterval * config.key.flats.size, sharpXInterval * config.key.sharps.size))
   val noteHeight = ledgerSpacing * 1.4f
   val noteWidth = noteHeight * 1.289f
-  val noteIntervalX = noteWidth * 1.75f
+  val noteIntervalX = noteWidth * (1.75f * min(1f, width.dp / 300.dp))
 }
 
 object StaffConst {

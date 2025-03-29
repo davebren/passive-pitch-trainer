@@ -8,6 +8,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalDensity
+import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
@@ -35,6 +36,34 @@ fun CenteredVerticalText(
 
   Text(
     text = text,
+    fontSize = fontSize,
+    textAlign = TextAlign.Center,
+    fontWeight = fontWeight,
+    color = color,
+    style = style,
+    fontFamily = fontFamily,
+    modifier = adjustedModifier
+      .wrapContentHeight()
+  )
+}
+
+@Composable
+fun CenteredVerticalText(
+  annotatedText: AnnotatedString = AnnotatedString(""),
+  fontSize: TextUnit = 16.sp,
+  fontWeight: FontWeight = FontWeight.Normal,
+  color: Color = Color.Unspecified,
+  style: TextStyle = LocalTextStyle.current,
+  fontFamily: FontFamily = FontFamily.Default,
+  modifier: Modifier = Modifier,
+) {
+  var adjustedModifier = modifier
+  if (getPlatform().type == PlatformType.desktop) {
+    adjustedModifier = modifier.offset(y = with(LocalDensity.current) { -16.sp.toDp() * .1f } ) // Fix issue with desktop text alignment.
+  }
+
+  Text(
+    text = annotatedText,
     fontSize = fontSize,
     textAlign = TextAlign.Center,
     fontWeight = fontWeight,
